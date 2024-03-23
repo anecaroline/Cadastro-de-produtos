@@ -22,6 +22,13 @@ export const produtos = [{
     'disponivel': true
         
   },
-  
+  {
+    'id' : 4,
+    'nome': 'Mundica',
+    'descricao':' ',
+    'valor':1,
+    'disponivel': false
+        
+  },
 ]
 

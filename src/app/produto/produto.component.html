@@ -1,0 +1,42 @@
+
+<form #heroForm="ngForm">
+    {{ model | json }}
+    <div [hidden]="heroForm.submitted">
+        <div class="form-group">
+        <label for="nome">Nome do Produto</label>
+        <input type="text" class="form-control" id="nome"
+                required
+                [(ngModel)]="model.nome" name="nome"/>
+        </div>
+        
+        <div class="form-group">
+        <label for="descricao">Descrição do Produto</label>
+        <input type="text"  class="form-control" id="descricao"
+                [(ngModel)]="model.descricao" name="descricao"/>
+        </div>    
+
+        <div class="form-group">
+            <label for="valor">Valor do Produto</label>
+            <input type="number"  class="form-control" id="valor"
+                [(ngModel)]="model.valor" name="valor"/>
+        </div>   
+
+        <div class="form-group">
+            <p>Disponível?</p>
+            <input type="radio" name="disponivel_sim" [value]="true" 
+                [(ngModel)]="model.disponivel" />
+            <label for="disponivel_sim">Sim</label>
+            <br/>
+            <input type="radio" name="disponivel_nao" [value]="false" 
+                [(ngModel)]="model.disponivel" />
+            <label for="disponivel_nao">Não</label>
+        </div>   
+
+        <button type="submit">Submit</button>
+    </div>
+
+    <div class="submitted-message" *ngIf="heroForm.submitted">
+        <p>Você salvou o seu produto, {{ heroForm.value.nome }}!</p>
+    </div>
+
+</form>

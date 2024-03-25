@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Produto } from '../../model/produto';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, NgIf, } from '@angular/common';
-import {produtos} from '../../model/listaprodutos';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ProdutoService } from '../produto.service';
 
 @Component({
   selector: 'app-produto',
@@ -11,51 +11,34 @@ import { ActivatedRoute } from '@angular/router';
   imports: [
     CommonModule,
     FormsModule,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   templateUrl: './produto.component.html',
   styleUrl: './produto.component.css'
 })
 export class ProdutoComponent {
+  model: Produto = null!;
 
-  // powers = ['Really Smart', 'Super Flexible',
-  //           'Super Hot', 'Weather Changer'];
+  constructor(private activatedRoute: ActivatedRoute, private produtoService: ProdutoService) { }
 
-  model = new Produto(18, 'Dr. IQx', 'Chuck Overstreet', 10, true);
-
-  submitted = false;
-  
-
-  onSubmit() { this.submitted = true; }
-  // produtos = produtos;
-
-  // ngOnInit(): void{
-
-  //   for (const produto of produtos){
-      
-  //     console.log(produto);
-  //   }
-
-   
-  // }
-
-  constructor(private activatedRoute : ActivatedRoute) { }
- 
   ngOnInit(): void {
-  const produtoId = parseInt(this.activatedRoute.snapshot.paramMap.get("id")!) ;
-  
-  console.log(produtoId);
-  for (const produto of produtos){
-    if (produtoId === produto.id){
-      this.model = produto;
-      break;
-    }
-    console.log(produto.id);
-  }
-  
- 
-}
+    const produtoId = parseInt(this.activatedRoute.snapshot.paramMap.get("id")!);
 
+    if (produtoId == -1) {
+      this.model = new Produto(-1, '', '', 0, true);
+    } else {
+      this.model = this.produtoService.getProduto(produtoId)!;
+    }
+  }
+
+  onSubmit() { 
+    if (this.model.id == -1) {
+      this.produtoService.createProduto(this.model);
+    } else {
+      this.produtoService.updateProduto(this.model);
+    }
+  }
 }
 
 

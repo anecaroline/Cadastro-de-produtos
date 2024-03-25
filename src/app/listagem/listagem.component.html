@@ -14,11 +14,14 @@
             <tr *ngFor ="let produto of produtos">
                 <td>{{ produto.id }}</td>
                 <td>{{ produto.nome }}</td>
-                <td>{{ produto.valor }}</td>
+                <td>{{ produto.valor | currency: 'BRL' }}</td>
                 <td><a [routerLink]="['/produto', produto.id]" >editar</a></td>
                 
             </tr>
         </tbody>
         
     </table>
+</div>
+<div>
+    <input type="button" [routerLink]="['/produto', -1]" value="Cadastrar novo produto"/>
 </div>

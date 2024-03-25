@@ -1,7 +1,6 @@
-
-<form #heroForm="ngForm">
-    {{ model | json }}
-    <div [hidden]="heroForm.submitted">
+<p><a routerLink="/listagem" routerLinkActive="active" ariaCurrentWhenActive="page">Voltar para a listagem</a></p>
+<form #produtoForm="ngForm" (ngSubmit)="onSubmit()">
+    <div [hidden]="produtoForm.submitted">
         <div class="form-group">
         <label for="nome">Nome do Produto</label>
         <input type="text" class="form-control" id="nome"
@@ -32,11 +31,11 @@
             <label for="disponivel_nao">Não</label>
         </div>   
 
-        <button type="submit">Submit</button>
+        <button type="submit">Salvar</button>
     </div>
 
-    <div class="submitted-message" *ngIf="heroForm.submitted">
-        <p>Você salvou o seu produto, {{ heroForm.value.nome }}!</p>
+    <div class="submitted-message" *ngIf="produtoForm.submitted">
+        <p>Você salvou o seu produto, {{ produtoForm.value.nome }}!</p>
     </div>
 
 </form>

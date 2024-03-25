@@ -1,10 +1,9 @@
-import { NgModule } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { ProdutoComponent} from './produto/produto.component';
 
 @NgModule({
   imports: [
@@ -13,10 +12,8 @@ import { ProdutoComponent} from './produto/produto.component';
     FormsModule
   ],
   declarations: [
-    AppComponent,
-    ProdutoComponent
+    AppComponent
   ],
-  providers: [],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
